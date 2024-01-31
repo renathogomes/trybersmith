@@ -1,15 +1,10 @@
 import { ServiceResponse } from '../types/ServiceResponse';
 import ProductModel,
 { ProductInputtableTypes, ProductSequelizeModel } from '../database/models/product.model';
-
-type Product = {
-  id: number;
-  name: string;
-  price: string;
-};
+import { ProductOmit } from '../types/Product';
 
 const createProduct = async (product: ProductInputtableTypes): 
-Promise<ServiceResponse<Product>> => {
+Promise<ServiceResponse<ProductOmit>> => {
   const { dataValues: { id, name, price } } = await ProductModel.create(product);
   return { status: 'CREATED', data: { id, name, price } };
 };
