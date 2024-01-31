@@ -11,7 +11,7 @@ type Product = {
 const createProduct = async (product: ProductInputtableTypes): 
 Promise<ServiceResponse<Product>> => {
   const { dataValues: { id, name, price } } = await ProductModel.create(product);
-  return { status: 'SUCCESSFUL', data: { id, name, price } };
+  return { status: 'CREATED', data: { id, name, price } };
 };
 
 const getProduct = async (): Promise<ServiceResponse<ProductSequelizeModel[]>> => {

@@ -7,4 +7,12 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
   res.status(statusHTTP(product.status)).json(product.data);
 };
 
-export default { createProduct };
+const getProduct = async (_req: Request, res: Response): Promise<void> => {
+  const products = await productService.getProduct();
+  res.status(statusHTTP(products.status)).json(products.data);
+};
+
+export default {
+  createProduct,
+  getProduct,
+};
