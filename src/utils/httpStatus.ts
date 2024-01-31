@@ -4,7 +4,7 @@ export default function statusHTTP(status: string): number {
     INVALID_DATA: 400,
     UNAUTHORIZED: 401,
     NOT_FOUND: 404,
-    SUCCESFUL: 200,
+    SUCCESSFUL: 200,
     CREATED: 201,
   };
     
