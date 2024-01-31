@@ -2,11 +2,10 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
-import productMock from '../../mocks/product.mock';
-import { ServiceResponse } from '../../../src/types/ServiceResponse';
-import { Product } from '../../../src/types/Product';
-import productService from '../../../src/services/product';
 import productController from '../../../src/controller/product';
+import productService from '../../../src/services/product';
+import statusHTTP from '../../../src/utils/httpStatus';
+import productMock from '../../mocks/product.mock';
 
 chai.use(sinonChai);
 
@@ -20,19 +19,19 @@ describe('ProductsController', function () {
     sinon.restore();
   });
 
-  it('should verify the controller when successfully creating a new product', async function () {
-    req.body = productMock.ProductSuccesDB;
+   it('should create a product successfully', async function () {
+    req.body = productMock.ProductSuccesCreated;
 
-    const serviceResponse: ServiceResponse<Product> = {
-      status: 'SUCCESSFUL',
-      data: productMock.ProductSuccesCreated,
-    };
+    const createProductStub = sinon.stub(productService, 'createProduct').resolves({
+      status: 'CREATED',
+      data: productMock.ProductSuccesDB,
+    });
 
-    sinon.stub(productService, 'createProduct').resolves(serviceResponse);
     await productController.createProduct(req, res);
 
-    expect(res.status).to.have.been.calledWith(201);
-    expect(res.json).to.have.been.calledWith(productMock.ProductSuccesCreated);
+    expect(res.status).to.be.calledWith(statusHTTP('CREATED'));
+    expect(res.json).to.be.calledWith(productMock.ProductSuccesDB);
+    expect(createProductStub).to.be.calledWith(productMock.ProductSuccesCreated);
   });
 
 });

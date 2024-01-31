@@ -5,7 +5,9 @@ import ProductModel from '../../../src/database/models/product.model';
 import productService from '../../../src/services/product';
 
 describe('ProductsService', function () {
-  beforeEach(function () { sinon.restore(); });
+  beforeEach(function () {
+    sinon.restore();
+  });
 
   it('should verify the ability to create a new product', async function () {
     const parameters = productMock.ProductSuccesDB;
@@ -16,5 +18,5 @@ describe('ProductsService', function () {
 
     expect(serviceResponse.status).to.deep.equal('SUCCESSFUL');
   });
-
 });
+
