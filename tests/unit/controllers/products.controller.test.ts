@@ -8,7 +8,6 @@ import { Product } from '../../../src/types/Product';
 import productService from '../../../src/services/product';
 import productController from '../../../src/controller/product';
 
-
 chai.use(sinonChai);
 
 describe('ProductsController', function () {
@@ -32,8 +31,8 @@ describe('ProductsController', function () {
     sinon.stub(productService, 'createProduct').resolves(serviceResponse);
     await productController.createProduct(req, res);
 
-    chai.expect(res.status).to.have.been.calledWith(201);
-    chai.expect(res.json).to.have.been.calledWith(productMock.ProductSuccesCreated);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(productMock.ProductSuccesCreated);
   });
 
 });

@@ -14,7 +14,7 @@ describe('ProductsService', function () {
 
     const serviceResponse = await productService.createProduct(parameters);
 
-    expect(serviceResponse.status).to.deep.equal('SUCCESFUL');
+    expect(serviceResponse.status).to.deep.equal('SUCCESSFUL');
   });
 
 });
