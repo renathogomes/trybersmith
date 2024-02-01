@@ -5,7 +5,8 @@ import { ProductOmit } from '../types/Product';
 
 const createProduct = async (product: ProductInputtableTypes): 
 Promise<ServiceResponse<ProductOmit>> => {
-  const { dataValues: { id, name, price } } = await ProductModel.create(product);
+  const data = await ProductModel.create(product);
+  const { dataValues: { id, name, price } } = data;
   return { status: 'CREATED', data: { id, name, price } };
 };
 
