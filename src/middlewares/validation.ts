@@ -40,18 +40,8 @@ const validatePriceExist = (req: Request, res: Response, next: NextFunction) => 
 // Será validado que o campo "price" tem o tipo string
 const validatePrice = (req: Request, res: Response, next: NextFunction) => {
   const { price } = req.body as ProductInputtableTypes;
-  if (typeof price !== 'number') {
-    return res.status(422).json({ message: '"price" must be a number' });
-  }
-  next();
-};
-
-// Será validado que o campo "price" é uma string com mais de 2 caracteres
-const validatePriceLength = (req: Request, res: Response, next: NextFunction) => {
-  const { price } = req.body as ProductInputtableTypes;
-  if (price.length <= 2 || price.length >= 6) {
-    return res.status(422)
-      .json({ message: '"price" length must be between 2 and 6 characters long' });
+  if (typeof price !== 'string') {
+    return res.status(422).json({ message: '"price" must be a string' });
   }
   next();
 };
@@ -62,5 +52,4 @@ export default {
   validateNameLength,
   validatePriceExist,
   validatePrice,
-  validatePriceLength,
 };
