@@ -10,7 +10,7 @@ const loginService = async (user: UserLogin): Promise<ServiceResponse<Token>> =>
   const { username, password } = user;
 
   if (!username || !password) {
-    return { status: 'BAD_REQUEST', data: { message: '"username" and "password" are required' } };
+    return { status: 'INVALID_DATA', data: { message: '"username" and "password" are required' } };
   }
 
   // busque se existe um usuário com o username informado, ou se o password está correto.

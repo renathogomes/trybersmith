@@ -1,4 +1,5 @@
-type ResponseErrorType = 'BAD_REQUEST' | 'UNAUTHORIZED';
+type ResponseErrorType = 'BAD_REQUEST' |
+'UNAUTHORIZED' | 'INVALID_DATA' | 'NOT_FOUND' | 'INTERNAL_ERROR';
 
 export type ResponseError = {
   status: ResponseErrorType,
