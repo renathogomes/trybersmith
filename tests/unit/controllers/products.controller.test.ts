@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import dataMock from '../../mocks/product.mock';
 import productService from '../../../src/services/product';
 import productsController from '../../../src/controller/product';
-import productModel, { ProductSequelizeModel } from '../../../src/database/models/product.model';
+import productModel from '../../../src/database/models/product.model';
 
 chai.use(sinonChai);
 
@@ -30,6 +30,7 @@ describe('ProductsController', function () {
     await productsController.createProduct(req, res);
 
     expect(res.status).toBeCalledWith('CREATED');
+    expect(res.json).toBeCalledWith(dataMock.mockNewProduct);
   });
 
   // Deve ser possivel listar todos os produtos
