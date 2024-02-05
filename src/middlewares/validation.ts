@@ -22,8 +22,8 @@ const validateName = (req: Request, res: Response, next: NextFunction) => {
 // faz validação se o campo "name" é uma string com mais de 2 caracteres
 const validateNameLength = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body as ProductInputtableTypes;
-  if (name.length <= 5) {
-    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  if (name.length <= 3) {
+    return res.status(422).json({ message: '"name" length must be at least 3 characters long' });
   }
   next();
 };
@@ -46,10 +46,20 @@ const validatePrice = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+// Será validado que o campo "price" tem o tamanho mínimo de 3 caracteres
+const validatePriceLength = (req: Request, res: Response, next: NextFunction) => {
+  const { price } = req.body as ProductInputtableTypes;
+  if (price.length <= 3) {
+    return res.status(422).json({ message: '"price" length must be at least 3 characters long' });
+  }
+  next();
+};
+
 export default {
   validateNameExist,
   validateName,
   validateNameLength,
   validatePriceExist,
   validatePrice,
+  validatePriceLength,
 };

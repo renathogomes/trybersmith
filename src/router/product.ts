@@ -11,6 +11,7 @@ routerProduct.post(
   middleware.validateNameLength,
   middleware.validatePriceExist,
   middleware.validatePrice,
+  middleware.validatePriceLength,
   productController.createProduct,
 );
 routerProduct.get('/', productController.getProduct);
