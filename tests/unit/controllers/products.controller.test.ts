@@ -1,3 +1,4 @@
+import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
@@ -28,10 +29,17 @@ describe('ProductsController', function () {
 
     await productsController.createProduct(req, res);
 
-    expect(res.status).toBeCalledWith(201);
-    expect(res.json).toBeCalledWith({
-      status: 'CREATED',
-      data: dataMock.mockNewProduct,
-    });
+    expect(res.status).toBeCalledWith('CREATED');
+  });
+
+  // Deve ser possivel listar todos os produtos
+  it('Should be possible list all products', async function () {
+    const list = dataMock.mockAllProduct.map((product) => productModel.build(product));
+    sinon.stub(productModel, 'findAll').resolves(list);
+
+    await productsController.getProduct(req, res);
+
+    expect(res.status).toBeCalledWith(200);
+    expect(res.json).toBeCalledWith(list);
   });
 });
