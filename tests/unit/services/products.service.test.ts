@@ -15,7 +15,7 @@ describe('ProductsService', function () {
 
     const newProductMock = await productService.createProduct(dataMock.mockNewProduct);
 
-    expect(newProductMock.status).to.be.equal('CREATED');
+    expect(newProductMock.status).to.be.equal(201);
     expect(newProductMock.data).to.be.deep.equal(dataMock.mockNewProduct);
   });
 });

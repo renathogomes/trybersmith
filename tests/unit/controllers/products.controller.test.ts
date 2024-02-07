@@ -26,6 +26,6 @@ describe('ProductsController', function () {
     await productsController.createProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(201);
-    expect(res.json).to.have.been.calledWith({ status: 'CREATED', data: productMock.mockNewProduct });
+    expect(res.json).to.have.been.calledWith({ status: 201, data: productMock.mockNewProduct });
   })
 });
