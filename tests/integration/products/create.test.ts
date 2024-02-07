@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('POST /products', function () { 
   beforeEach(function () { sinon.restore(); });
-
+   describe('when creating a product', function () {
   // deve retornar um status 201 e o objeto criado
   it('should return status 201 and the created object', async function () {
     const product = productModel.build(dataMock.mockNewProduct);
@@ -21,5 +21,6 @@ describe('POST /products', function () {
 
     expect(res.status).to.be.equal(201);
   });
+});
 
 });
