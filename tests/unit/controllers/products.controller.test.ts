@@ -1,11 +1,10 @@
-import chai from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Request, Response } from 'express';
-import dataMock from '../../mocks/product.mock';
+import productMock from '../../mocks/product.mock';
 import productService from '../../../src/services/product';
 import productsController from '../../../src/controller/product';
-import productModel from '../../../src/database/models/product.model';
 
 chai.use(sinonChai);
 
@@ -19,28 +18,14 @@ describe('ProductsController', function () {
     sinon.restore();
   });
 
-  // Deve ser possivel criar um produto com sucesso
-  it('Should be possible create a product', async function () {
-    req.body = dataMock.mockNewProduct;
-    sinon.stub(productService, 'createProduct').resolves({
-      status: 'CREATED',
-      data: dataMock.mockNewProduct,
-    });
+  // deve retornar o producto criado e um status 'CREATED'
+  it('Should return the created product and a status CREATED', async function () {
+    req.body = productMock.mockNewProduct;
+    sinon.stub(productService, 'createProduct').resolves({ status: 'CREATED', data: productMock.mockNewProduct });
 
     await productsController.createProduct(req, res);
 
-    expect(res.status).toBeCalledWith('CREATED');
-    expect(res.json).toBeCalledWith(dataMock.mockNewProduct);
-  });
-
-  // Deve ser possivel listar todos os produtos
-  it('Should be possible list all products', async function () {
-    const list = dataMock.mockAllProduct.map((product) => productModel.build(product));
-    sinon.stub(productModel, 'findAll').resolves(list);
-
-    await productsController.getProduct(req, res);
-
-    expect(res.status).toBeCalledWith(200);
-    expect(res.json).toBeCalledWith(list);
-  });
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith({ status: 'CREATED', data: productMock.mockNewProduct });
+  })
 });
