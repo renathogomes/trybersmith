@@ -16,4 +16,13 @@ describe('ProductsService', function () {
 
     expect(serviceResponse.status).to.deep.equal('CREATED');
   });
+  // Verifica se é possível listar todos os produtos
+  it('Should be able to list all products', async function() {
+    
+    sinon.stub(ProductModel, 'findAll').resolves(productsMock.AllProducts);
+    
+    const serviceResponse = await productsService.getProduct();
+    
+    expect(serviceResponse.status).to.deep.equal('SUCCESSFUL')
+  });
 });

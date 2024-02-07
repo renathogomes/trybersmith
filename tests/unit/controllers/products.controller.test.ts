@@ -7,6 +7,8 @@ import { ServiceResponse } from '../../../src/types/ServiceResponse';
 import { ProductOmit } from '../../../src/types/Product';
 import productsService from '../../../src/services/product';
 import productsController from '../../../src/controller/product';
+import { ProductSequelizeModel } from '../../../src/database/models/product.model';
+
 
 chai.use(sinonChai);
 
@@ -33,5 +35,19 @@ describe('ProductsController', function () {
     
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(productsMock.newProductCreated);
+  })
+  // Verifica se é possível listar todos os produtos
+  it('Should be able to list all products', async function() {
+    
+    const serviceResponse: ServiceResponse<ProductSequelizeModel[]> = {
+      status: 'SUCCESSFUL',
+      data: productsMock.AllProducts,
+    }
+    
+    sinon.stub(productsService, 'getProduct').resolves(serviceResponse);
+    await productsController.getProduct(req, res);
+    
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productsMock.AllProducts);
   })
 });
