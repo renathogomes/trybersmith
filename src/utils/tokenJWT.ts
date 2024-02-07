@@ -8,6 +8,8 @@ type Payload = {
   username: string;
 };
 
-export default function tokenJWT(payload: Payload): string {
-  return jwt.sign(payload, secret);
-}
+const tokenJWT = (payload: Payload): string => jwt.sign(payload, secret);
+
+const verify = (token: string): Payload => jwt.verify(token, secret) as Payload;
+
+export default { tokenJWT, verify };

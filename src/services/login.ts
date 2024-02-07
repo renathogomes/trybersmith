@@ -20,7 +20,7 @@ const loginService = async (user: UserLogin): Promise<ServiceResponse<Token>> =>
   }
 
   // crie um token JWT para o usuário usando username e id, sendo o id o payload do token.
-  const token = jwtToken({ username, id: userFound.dataValues.id });
+  const token = jwtToken.tokenJWT({ username, id: userFound.dataValues.id });
 
   return { status: 'SUCCESSFUL', data: { token } };
 };
